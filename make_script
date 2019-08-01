@@ -1,0 +1,4 @@
+#!/bin/bash
+
+gcc -std=c99 -o bin/main src/main.c src/vdynamic_array_i32.c src/vdynamic_table.c src/vstring.c src/vmath.c src/vtree.c src/vbinary_tree.c src/vstring_builder.c src/vmemory_debug.c -pthread
+
