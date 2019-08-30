@@ -1,4 +1,4 @@
 #!/bin/bash
 
-./make_script
-./bin/main
+make
+bin/Debug-linux-x86_64/CTPL/CTPL
