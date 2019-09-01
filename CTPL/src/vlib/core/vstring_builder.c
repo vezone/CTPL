@@ -93,12 +93,6 @@ int32 vstring_builder_append_string(vstring_builder* builder, char* string)
 
 int32 vstring_builder_append_format(vstring_builder* builder, const char* format, ...)
 {
-	//va_list valist;
-	//va_start(valist, arguments_count)
-	//va_arg(valist, double);
-	//va_end(valist);
-	
-	//calculate how many arguments
 	int32 state = 0;
 	int32 arguments_count = 0;
 	va_list valist;
@@ -134,7 +128,6 @@ int32 vstring_builder_append_format(vstring_builder* builder, const char* format
 	va_start(valist, format);
 	while (*format != '\0')
 	{
-		
 		switch (*format)
 		{
 			case '%':
@@ -251,9 +244,7 @@ int32 vstring_builder_append_format(vstring_builder* builder, const char* format
 			} break;
 			
 		}
-		
 		format++;
-		
 	}
 	
 	return 0;

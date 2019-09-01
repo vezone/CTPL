@@ -6,6 +6,7 @@
 #define wait_for_input() int wait_for_input_number; scanf("%d", &wait_for_input_number);
 
 #include "vlib/core/vtypes.h"
+#include "vlib/core/vmath.h"
 #include "vlib/core/vstring.h"
 #include "vlib/core/vstring_builder.h"
 
@@ -164,8 +165,17 @@ int main(int argc, char** argv)
 	//func pointer
 	//funcpointer_test(real_func, 10);
 
+#if 1
 	vstring_test();
+	//vmath_test();
+
+#else
+
+	char* ptr = "string to ptr bla";
 	
+	printf("string = %s\n", (ptr+5));
+#endif
+
 	#endif	
 	
 	return 0;

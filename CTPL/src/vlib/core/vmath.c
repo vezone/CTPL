@@ -1,4 +1,5 @@
 #include "vmath.h"
+#include <stdio.h>
 
 int32 rank_of(int32 value)
 {
@@ -53,4 +54,16 @@ int32 get_number_of_digit(int64 number, int8 digit)
 	number /= get_number_rank_of(1, digit);
 	
 	return number;
+}
+
+void vmath_test()
+{
+	int32 rank_of_result = rank_of(19820);
+	printf("rank_of_result: %d\n", rank_of_result);
+
+	int32 get_number_rank_of_result = get_number_rank_of(2, 7);
+	printf("get_number_rank_of_result: %d\n", get_number_rank_of_result);
+
+	int32 get_number_of_digit_result = get_number_of_digit(234, 2);
+	printf("get_number_of_digit_result: %d\n", get_number_of_digit_result);
 }
