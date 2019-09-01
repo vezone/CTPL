@@ -30,6 +30,7 @@ int32 vstring_index_of(const char* input, char character);
 int32 vstring_last_index_of(const char* input, char character);
 char* vstring_replace_character(const char* input, char old_character, char new_character);
 char* vstring_replace_string(const char* input, const char* old_string, const char* new_string);
+char* vstring_substring(const char* input, int32 start_index);
 
 char* vint32_to_string(int32 value);
 char* vint64_to_string(int64 value);

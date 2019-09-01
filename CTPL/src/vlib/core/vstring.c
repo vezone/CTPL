@@ -314,7 +314,6 @@ void vstring_pushc(char* input, char character)
 {
 	int32 input_length = vstring_length(input);
 	char* output = realloc(input, (input_length + 2) * sizeof(char));
-	//printf("input = %s, character = %c, input_len = %d, output = %s|\n", input, character, input_length, output);
 	if (output)
 	{
 		output[input_length] = character;
@@ -644,7 +643,7 @@ char* vstring_replace_character(const char* input, char old_character, char new_
 	return result;
 }
 
-//NOTE: not tested enough
+//NOTE: not tested
 char* vstring_replace_string(const char* input, const char* old_string, const char* new_string)
 {
 	int8 temp;
@@ -728,6 +727,23 @@ char* vstring_replace_string(const char* input, const char* old_string, const ch
 		result = (char*)input;
 	}
 	return result;
+}
+
+char* vstring_substring(const char* input, int32 start_index)
+{
+	int32 input_length = vstring_length(input);
+	if ((start_index < input_length) && (start_index >= 0))
+	{
+		int32 new_length = input_length - start_index + 1;
+		char* result = malloc(new_length * sizeof(char));
+		int32 i;
+		for (i = start_index; i < input_length; i++)
+		{
+			result[i - start_index] = input[i];
+		}
+		return result;
+	}
+	return "vstring_substring: ERROR";
 }
 
 char* vint32_to_string(int32 value)
@@ -842,8 +858,11 @@ void vstring_test()
 	printf("vstring_replace_character_result: %s\n", vstring_replace_character_result);
 
 	char* vstring_replace_string_result = 
-		vstring_replace_string("Hello, Mike! It's Alex", "Alex", "Jo");
+		vstring_replace_string("Hello, Mike! It's Alex", "Alex", "Joe");
 	printf("vstring_replace_string_result: %s\n", vstring_replace_string_result);
+	
+	char* vstring_substring_result = vstring_substring("one two three", 5);
+	printf("vstring_substring_result: %s\n", vstring_substring_result);
 
 	const char* vstring_format_name = "Kris";
 	int32 age = 20;
