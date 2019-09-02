@@ -166,8 +166,20 @@ int main(int argc, char** argv)
 	//funcpointer_test(real_func, 10);
 
 #if 1
-	vstring_test();
+	//vstring_test();
 	//vmath_test();
+	programming_language_main();
+
+#if 0
+	//for faster memcpy
+	char* str_ptr =  "abcdabcd";
+	int64 int_ptr = *((int64*) str_ptr);
+	char* new_str = malloc(9*sizeof(char));
+	new_str = ((char*) (int64*)&int_ptr);
+	new_str[8] = 0;
+	printf("new_str: %s\n", new_str);
+
+#endif
 
 #else
 
