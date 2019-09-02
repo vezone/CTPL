@@ -503,6 +503,35 @@ char* vstring_cats(const char* input, const char* characters_to_delete)
 	return result_string;
 }
 
+char* vstring_remove(const char* input, int32 start_index)
+{
+	int32 input_length = vstring_length(input);
+	if (start_index == 0)     { return ""; }
+	else if (start_index < 0) { return "vstring_remove: ERROR"; }
+	char* result = malloc((start_index + 1) * sizeof(char));
+	vstring_copy(result, input, start_index);
+	result[start_index] = '\0';
+	return result;
+}
+
+//NOTE: not tested
+//TODO: fix bug
+char* vstring_remove_range(const char* input, int32 start_index, int32 end_index)
+{
+	//0 1 2 3 4 5 6 7 8 9
+	//      3     6
+	int32 input_length = vstring_length(input);
+	int32 new_length = input_length - (end_index - start_index + 1);
+	if ((start_index < 0) && (end_index < 0) &&
+		(start_index >= end_index) && (end_index >= input_length)) 
+	{ return "vstring_remove: ERROR"; }
+	char* result = malloc((new_length + 1) * sizeof(char));
+	vstring_copy(result, input, start_index);
+	vstring_copy((result + start_index), (input + end_index + 1), (input_length - end_index));
+	result[new_length] = '\0';
+	return result;
+}
+
 char* vstring_with(char character, int32 number_of_splitters)
 {
 	if (number_of_splitters > 0)
@@ -564,38 +593,6 @@ char* vstring_to_lower(const char* input)
 	}
 	result[input_length] = '\0';
 	return result;
-}
-
-int32 vstring_to_int32(const char* string)
-{
-	char c;
-	int32 i = 0;
-	int32 minus = 1;
-	int32 result = 0;
-	int32 string_length = vstring_length(string);
-	
-	if (string[0] == '-')
-	{
-		minus = -1;
-		i = 1;
-	}
-	else if (string[0] == '+')
-	{
-		i = 1;
-	}
-	
-	for (; i < string_length; i++)
-	{
-		c = string[i];
-		if ((c < '0' || c > '9'))
-		{
-			return -1;
-		}
-		
-		result += (c - 48) * get_number_rank_of(1, (string_length - 1 - i));
-	}
-	
-	return minus * result;
 }
 
 int32 vstring_index_of(const char* input, char character)
@@ -746,6 +743,58 @@ char* vstring_substring(const char* input, int32 start_index)
 	return "vstring_substring: ERROR";
 }
 
+char* vstring_substring_range(const char* input, int32 start_index, int32 end_index)
+{
+	int32 input_length = vstring_length(input);
+	if ((start_index < input_length) && 
+		(start_index >= 0) && 
+		(end_index < input_length) &&
+		(end_index > start_index))
+	{
+		int32 i;
+		int32 new_length = end_index - start_index + 1;
+		char* result = malloc(new_length * sizeof(char));
+		for (i = start_index; i <= end_index; i++)
+		{
+			result[i - start_index] = input[i];
+		}
+		return result;
+	}
+	return "vstring_substring: ERROR";
+}
+
+int32 vstring_to_int32(const char* string)
+{
+	char c;
+	int32 i = 0;
+	int32 minus = 1;
+	int32 result = 0;
+	int32 string_length = vstring_length(string);
+	
+	if (string[0] == '-')
+	{
+		minus = -1;
+		i = 1;
+	}
+	else if (string[0] == '+')
+	{
+		i = 1;
+	}
+	
+	for (; i < string_length; i++)
+	{
+		c = string[i];
+		if ((c < '0' || c > '9'))
+		{
+			return -1;
+		}
+		
+		result += (c - 48) * get_number_rank_of(1, (string_length - 1 - i));
+	}
+	
+	return minus * result;
+}
+
 char* vint32_to_string(int32 value)
 {
 	int32 i;
@@ -834,6 +883,15 @@ void vstring_test()
 	char* vstring_cats_result = vstring_cats("string, with, a, lot, of, commas", ",o");
 	printf("vstring_cats_result: %s\n", vstring_cats_result);
 	
+	const char* vstring_remove_string = "Alex, Artem, Anton";
+	char* vstring_remove_result = vstring_remove(
+		vstring_remove_string, 
+		vstring_last_index_of(vstring_remove_string, 'A')-2);
+	printf("vstring_remove_result: %s\n", vstring_remove_result);
+	
+	char* vstring_remove_range_result = vstring_remove_range("abc---def", 3, 9);
+	printf("vstring_remove_range_result: %s\n", vstring_remove_range_result);
+
 	char* vstring_pushs_result;
 	vstring_set(vstring_pushs_result, "string ");
 	vstring_pushs(vstring_pushs_result, "get");
@@ -861,9 +919,13 @@ void vstring_test()
 		vstring_replace_string("Hello, Mike! It's Alex", "Alex", "Joe");
 	printf("vstring_replace_string_result: %s\n", vstring_replace_string_result);
 	
-	char* vstring_substring_result = vstring_substring("one two three", 5);
+	char* vstring_substring_result = vstring_substring("one two three", 4);
 	printf("vstring_substring_result: %s\n", vstring_substring_result);
 
+	char* vstring_substring_from_result = 
+		vstring_substring_range("one two three", 0, 2);
+	printf("vstring_substring_from_result: %s\n", vstring_substring_from_result);
+	
 	const char* vstring_format_name = "Kris";
 	int32 age = 20;
 	char* vstring_format_result = 
