@@ -14,6 +14,7 @@ void vstring_join_character(char* left_string, char character);
 char* vstring_format(const char* format, ...);
 int32 vstring_length(const char* str);
 int32 vstring_compare(const char* left_string, const char* right_string);
+int32 vstring_compare_to(const char* left_string, const char* right_string, int32 length);
 char* vstring_inverse(const char* input);
 void vstring_set_elements_to(char* input, char value);
 void vstring_pushc(char* input, char character);

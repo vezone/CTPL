@@ -2,6 +2,9 @@
 
 #include <stdint.h>
 
+#include <stdlib.h>
+#include <stdio.h>
+
 typedef int8_t int8;
 typedef int16_t int16;
 typedef int32_t int32;
@@ -26,6 +29,7 @@ typedef double vec4d[4];
 #define GB(x) 1024 * MB(x)
 
 #define nullptr ((void*) 0)
+#define assert(x) if (!(x)) { printf("FATAL: "#x" expression is not valid"); exit(1); }
 
 /*
 	Name            BG  FG

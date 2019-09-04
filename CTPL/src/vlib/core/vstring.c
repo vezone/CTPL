@@ -281,7 +281,38 @@ int32 vstring_compare(const char* left_string, const char* right_string)
 			}
 		}
 	}
+	return 1;
+}
+
+int32 vstring_compare_to(const char* left_string, const char* right_string, int32 length)
+{
+	int32 left_string_length = vstring_length(left_string);
+	int32 right_string_length = vstring_length(right_string);
 	
+	if ((left_string_length == 0) 
+		||
+		(right_string_length == 0))
+	{	
+		return 0;	
+	}
+	else if ((left_string_length > right_string_length)
+		||
+		(left_string_length < right_string_length))
+	{
+		return 0;
+	}
+	else 
+	{
+		for (right_string_length = 0;
+			 right_string_length < length;
+			 right_string_length++)
+		{
+			if (left_string[right_string_length] != right_string[right_string_length])
+			{
+				return 0;
+			}
+		}
+	}
 	return 1;
 }
 

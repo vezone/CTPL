@@ -1,5 +1,12 @@
 #pragma once
 
+/*
+bitwise: all the C data structures you'll ever need
+1. Stretchy buffers
+2. Pointer/uintptr hash tables  (uintptr -> uintptr key-value mapping)
+3. String intern table
+*/
+
 #include <stddef.h>
 
 #define MAX(x, y) ((x) >= (y) ? (x) : (y))
@@ -29,4 +36,4 @@ void varray_test();
 #define varray_fit(b, n) (varray_fits(b, n) ? 0 : ((b) = varray_grow((b), varray_len(b) + (n), sizeof(*b))))
 
 #define varray_push(b, v) (varray_fit(b, 1), b[varray_len(b)] = (v), varray_hdr(b)->length++)
-#define varray_free(b) ((b) ? free(varray_hdr(b)) : 0)
+#define varray_free(b) ((b) ? free(varray_hdr(b)) : ((b) = NULL))
