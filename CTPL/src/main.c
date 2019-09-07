@@ -94,6 +94,49 @@ void funcpointer_test(func_pointer function, int number)
 	function(number);
 }
 
+typedef struct A
+{
+	int32 a;
+	int32 b;
+	int64 c;
+} A;
+
+typedef struct B
+{
+	int32 a;
+	int32 b;
+} B;
+
+void malloc_struct_test()
+{
+	A* a;
+	B* b;
+
+	void* data = malloc(sizeof(*a) + sizeof(*b) + sizeof(*a));
+	a = &(((A*) data)[0]);
+	a->a = 1;
+	a->b = 2;
+	a->c = 3;
+	
+	b = (B*)&(a[1]);
+	b->a = 1;
+	b->b = 2;
+
+	A* c;
+	c = (A*)&(b[1]);
+	c->a = 1000;
+
+	printf("%d %d %ld\n", a->a, a->b, a->c);
+	printf("%d %d\n", b->a, b->b);
+	printf("%d\n", c->a);
+
+	if (data)
+	{
+		free(data);
+	}
+
+}
+
 int main(int argc, char** argv)
 {
 	
@@ -164,11 +207,14 @@ int main(int argc, char** argv)
 	
 	//func pointer
 	//funcpointer_test(real_func, 10);
+	//malloc_struct_test();
 
 #if 1
 	//vstring_test();
 	//vmath_test();
 	programming_language_main();
+
+
 
 #if 0
 	//for faster memcpy

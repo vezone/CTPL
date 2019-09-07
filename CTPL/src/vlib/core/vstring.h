@@ -26,6 +26,8 @@ char* vstring_cats(const char* input, const char* characters_to_delete);
 char* vstring_remove(const char* input, int32 start_index);
 char* vstring_remove_range(const char* input, int32 start_index, int32 end_index);
 char* vstring_with(char character, int32 number_of_splitters);
+char vstring_to_lowerc(char character);
+char vstring_to_upperc(char character);
 char* vstring_to_upper(const char* input);
 char* vstring_to_lower(const char* input);
 int32 vstring_index_of(const char* input, char character);

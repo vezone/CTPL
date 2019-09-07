@@ -37,3 +37,4 @@ void varray_test();
 
 #define varray_push(b, v) (varray_fit(b, 1), b[varray_len(b)] = (v), varray_hdr(b)->length++)
 #define varray_free(b) ((b) ? free(varray_hdr(b)) : ((b) = NULL))
+#define varray_end(b) ((b) + varray_len(b))

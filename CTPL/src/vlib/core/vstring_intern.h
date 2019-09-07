@@ -15,14 +15,13 @@ static vintern* interns;
 const char* vstring_intern_range(const char* start, const char* end)
 {
     int32 i;
-    int32 interns_length = varray_len(interns);
     int32 length = end - start;
-    for (i = 0; i < interns_length; i++)
+    for (vintern* it = interns; it != varray_end(interns); it++)
     {
-        if (interns[i].length == length && 
-            vstring_compare_to(interns[i].buffer, start, length))
+        if (it->length == length && 
+            vstring_compare_to(it->buffer, start, length))
         {
-            return interns[i].buffer;
+            return it->buffer;
         }
     }
     char* new_string = malloc((length+1)*sizeof(char));

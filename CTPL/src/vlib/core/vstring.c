@@ -584,6 +584,22 @@ char* vstring_with(char character, int32 number_of_splitters)
 	}
 }
 
+char vstring_to_upperc(char character)
+{
+	if (character >= 'a' && character <= 'z')
+		return (character - 'a' + 'A');
+	else 
+		return character;
+}
+
+char vstring_to_lowerc(char character)
+{
+	if (character >= 'A' && character <= 'Z')
+		return (character - 'A' + 'a');
+	else 
+		return character;
+}
+
 char* vstring_to_upper(const char* input)
 {
 	int32 i;

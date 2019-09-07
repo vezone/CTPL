@@ -14,6 +14,7 @@ project "CTPL"
 	location "CTPL"
 	kind "ConsoleApp"
 	language "C"
+	buildoptions "-std=c99"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin/Intermidiates/" .. outputdir .. "/%{prj.name}")

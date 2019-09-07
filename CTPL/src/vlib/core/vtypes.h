@@ -29,7 +29,7 @@ typedef double vec4d[4];
 #define GB(x) 1024 * MB(x)
 
 #define nullptr ((void*) 0)
-#define assert(x) if (!(x)) { printf("FATAL: "#x" expression is not valid"); exit(1); }
+#define assert(x) if (!(x)) { printf("FATAL: "#x" expression is not valid\n"); exit(1); }
 
 /*
 	Name            BG  FG
