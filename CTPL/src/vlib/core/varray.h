@@ -8,13 +8,14 @@ bitwise: all the C data structures you'll ever need
 */
 
 #include <stddef.h>
+#include "vtypes.h"
 
 #define MAX(x, y) ((x) >= (y) ? (x) : (y))
 
 typedef struct varray_header
 {
-    size_t length;
-    size_t capacity;
+    uint32 length;
+    uint32 capacity;
     char array[0]; // [0] C99 only feature
 } varray_header;
 
@@ -36,5 +37,6 @@ void varray_test();
 #define varray_fit(b, n) (varray_fits(b, n) ? 0 : ((b) = varray_grow((b), varray_len(b) + (n), sizeof(*b))))
 
 #define varray_push(b, v) (varray_fit(b, 1), b[varray_len(b)] = (v), varray_hdr(b)->length++)
+#define varray_pop(b) (varray_hdr(b)->length--)
 #define varray_free(b) ((b) ? free(varray_hdr(b)) : ((b) = NULL))
 #define varray_end(b) ((b) + varray_len(b))

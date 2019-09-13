@@ -18,11 +18,10 @@
 
 #include "vlib/core/vprofiling.h"
 
-
 #include "vlib/lexer/programming_language.h"
+#include "vlib/core/vmemory_debug.h"
 
 /*
-
 #include "vtree.h"
 
 */
@@ -57,7 +56,7 @@
 */
 
 /*
-	FIXME
+	FIXME:
 	TODO:
 	*переписать vstring.h, чтобы соблюсти v конвенцию
 	**vstring for vstring_builder.h
@@ -172,19 +171,16 @@ int main(int argc, char** argv)
 	в качестве начальной реализации можно создать простую динамическую таблицу.
 		
 	*/
-	/*
+	
+	#if 0
 	
 	vmemory_debug_init();
 	vmemory_debug_set_log(0);
-	
-	MEMDEB(
-		void* data = malloc(12);
-		data = malloc(120);
-		data = malloc(234);
-		data = malloc(1024);
-		data = malloc(512);
-	);
-	*/
+	vmemory_debug_test();
+
+	//varray_test();
+
+	#endif
 	
 	//last
 	//vstring_builder_test();
@@ -210,10 +206,9 @@ int main(int argc, char** argv)
 	//malloc_struct_test();
 
 #if 1
-	//vstring_test();
+	vstring_test();
 	//vmath_test();
-	programming_language_main();
-
+	//programming_language_main();
 
 
 #if 0
@@ -227,11 +222,6 @@ int main(int argc, char** argv)
 
 #endif
 
-#else
-
-	char* ptr = "string to ptr bla";
-	
-	printf("string = %s\n", (ptr+5));
 #endif
 
 	#endif	

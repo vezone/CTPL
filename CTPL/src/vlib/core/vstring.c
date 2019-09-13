@@ -656,6 +656,39 @@ int32 vstring_index_of(const char* input, char character)
 	return -1;
 }
 
+int32 vstring_index_of_string(const char* input, const char* string)
+{
+	int32 input_length = vstring_length(input);
+	int32 string_length = vstring_length(string);
+	if (input_length > 0)
+	{
+		int32 i;
+		int32 j;
+		int8 flag = -1;
+		for (i = 0; i < input_length; i++)
+		{
+			for (j = 0; j < string_length; j++)
+			{
+				if (input[i + j] == string[j])
+				{
+					flag = 1;
+				}
+				else
+				{
+					flag = -1;
+					j = string_length;
+				}
+			}
+			if (flag == 1)
+			{
+				return i;
+			}
+		}
+		return flag;
+	}
+	return -1;
+}
+
 int32 vstring_last_index_of(const char* input, char character)
 {
 	int32 i;
@@ -954,6 +987,9 @@ void vstring_test()
 
 	int32 vstring_index_of_result = vstring_index_of("matrix A * B = C A", 'A');
 	printf("vstring_index_of_result: %d\n", vstring_index_of_result);
+
+	int32 vstring_index_of_string_result = vstring_index_of_string("very long string", "long");
+	printf("vstring_index_of_string_result: %d\n", vstring_index_of_string_result);
 
 	int32 vstring_last_index_of_result = vstring_last_index_of("matrix A * B = C A", 'A');
 	printf("vstring_last_index_of_result: %d\n", vstring_last_index_of_result);
